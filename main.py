@@ -31,13 +31,14 @@ if __name__ == '__main__':
 
     PRINT_INTERVAL = 500
     N_GAMES = 50000
-    MAX_STEPS = 25
+    MAX_STEPS = 50
     total_steps = 0
     score_history = []
     evaluate = False
+    load = False
     best_score = 0
 
-    if evaluate:
+    if  load:
         maddpg_agents.load_checkpoint()
 
     for i in range(N_GAMES):
@@ -46,8 +47,8 @@ if __name__ == '__main__':
         done = [False]*n_agents
         episode_step = 0
         while not any(done):
-            if evaluate:
-                env.render()
+            # if evaluate:
+            #     env.render()
                 #time.sleep(0.1) # to slow down the action for the video
             actions = maddpg_agents.choose_action(obs)
             obs_, reward, done, info = env.step(actions)
